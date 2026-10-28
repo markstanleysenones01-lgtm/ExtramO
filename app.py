@@ -1,3 +1,4 @@
+import streamlit as st
 # --- App Header ---
 st.title("⚡ ExtraMo")
 st.caption("Turn extra client requests into extra revenue.")
