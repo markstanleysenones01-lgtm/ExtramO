@@ -1,0 +1,83 @@
+# --- App Header ---
+st.title("⚡ ExtraMo")
+st.caption("Turn extra client requests into extra revenue.")
+
+# --- Session State Management ---
+if "free_uses_left" not in st.session_state:
+    st.session_state["free_uses_left"] = 3
+
+if "is_subscribed" not in st.session_state:
+    st.session_state["is_subscribed"] = False
+
+VALID_KEYS = ["EXTRA2026", "PRO_MEMBER_99", "FREELANCE_BOOST"]
+
+# --- Sidebar Pro Activation ---
+with st.sidebar:
+    st.header("⚡ ExtraMo Pro")
+    st.caption("Price: $25 / month")
+    
+    if st.session_state["is_subscribed"]:
+        st.success("🟢 Pro Plan Active")
+    else:
+        st.warning(f"Free Plan: {st.session_state['free_uses_left']} uses remaining")
+        
+        st.subheader("🔑 Activate Pro Account")
+        key_input = st.text_input("Enter License Key", type="password")
+        if st.button("Unlock Unlimited Access"):
+            if key_input.strip() in VALID_KEYS:
+                st.session_state["is_subscribed"] = True
+                st.success("Successfully upgraded to Pro!")
+                st.rerun()
+            else:
+                st.error("Invalid Key")
+
+st.divider()
+
+# --- Form Inputs ---
+st.subheader("1. Request Details")
+client_name = st.text_input("Client Name", placeholder="Acme Corp")
+default_rate = st.number_input("Standard Hourly Rate ($)", value=120.0, step=10.0, min_value=0.0)
+estimated_hours = st.number_input("Extra Hours Needed", min_value=0.5, value=3.0, step=0.5)
+is_rush = st.checkbox("Mark as Rush / Priority Work (1.5x Rate)")
+
+# --- Calculations ---
+active_rate = default_rate * 1.5 if is_rush else default_rate
+total_fee = estimated_hours * active_rate
+
+st.divider()
+
+# --- Financial Impact Display ---
+st.subheader("2. Financial Impact")
+st.metric("Effective Rate", f"${active_rate:.2f}/hr")
+st.metric("Total Additional Fee", f"${total_fee:,.2f}")
+
+if is_rush:
+    st.warning("⚡ Priority Rate Applied (+50% surcharge)")
+
+st.divider()
+
+# --- Export & Email Generator Section ---
+st.subheader("3. Client Response Generator")
+
+can_access = st.session_state["is_subscribed"] or st.session_state["free_uses_left"] > 0
+
+if not can_access:
+    st.error("🔒 Free limit reached! You have used all 3 free change order drafts.")
+    st.info("Subscribe for **$25.00/month** to get unlimited change orders and email exports.")
+    st.markdown("[👉 **Click Here to Subscribe ($5.99/mo)**](https://buy.stripe.com/your_checkout_link_here)")
+else:
+    email_text = f"""Hi {client_name if client_name else 'there'},
+
+Thanks for reaching out! Regarding the additional work requested:
+
+I'd be happy to take care of this for you. Since this request falls outside our original contract scope, here is the estimate to complete it:
+
+• Estimated Hours: {estimated_hours} hrs
+• Rate: ${active_rate:.2f}/hr {'(Rush Rate)' if is_rush else ''}
+• Additional Fee: ${total_fee:,.2f}
+
+Please let me know if you approve this addition, and I will get started right away!
+
+Best regards,"""
+
+    st.code(email_text, language="text")
