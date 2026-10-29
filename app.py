@@ -82,3 +82,22 @@ Please let me know if you approve this addition, and I will get started right aw
 Best regards,"""
 
     st.code(email_text, language="text")
+# --- Currency Switcher ---
+currency_options = {
+    "USD ($)": "$",
+    "EUR (€)": "€",
+    "GBP (£)": "£",
+    "AED (د.إ)": "د.إ",
+}
+selected_currency = st.selectbox("Currency", list(currency_options.keys()))
+curr_symbol = currency_options[selected_currency]
+
+# Updated Hourly Rate Input using the chosen symbol
+default_rate = st.number_input(
+    f"Standard Hourly Rate ({curr_symbol})",
+    value=120.0,
+    step=10.0,
+    min_value=0.0,
+) 
+f"{curr_symbol}{active_rate:,.2f}/hr")
+st.metric("Total Additional Fee", f"{curr_symbol}{total_fee:,.2f}")
