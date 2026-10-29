@@ -129,3 +129,24 @@ templates = {
         "rush": True,
     },
 }
+# --- Form Inputs ---
+st.subheader("1. Request Details")
+
+selected_template = st.selectbox(
+    "⚡ Choose a Scope Template (Optional)", list(templates.keys())
+)
+defaults = templates[selected_template]
+
+client_name = st.text_input("Client Name", placeholder="Acme Corp")
+default_rate = st.number_input(
+    "Standard Hourly Rate ($)",
+    value=float(defaults["rate"]),
+    step=10.0,
+    min_value=0.0,
+)
+estimated_hours = st.number_input(
+    "Extra Hours Needed", min_value=0.5, value=float(defaults["hours"]), step=0.5
+)
+is_rush = st.checkbox(
+    "Mark as Rush / Priority Work (1.5x Rate)", value=bool(defaults["rush"])
+)
