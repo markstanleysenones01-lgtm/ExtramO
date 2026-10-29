@@ -1,4 +1,5 @@
 import streamlit as st
+import urllib.parse
 # --- App Header ---
 st.title("⚡ ExtraMo")
 st.caption("Turn extra client requests into extra revenue.")
@@ -37,6 +38,7 @@ st.divider()
 # --- Form Inputs ---
 st.subheader("1. Request Details")
 client_name = st.text_input("Client Name", placeholder="Acme Corp")
+client_email = st.text_input("Client Email Address", placeholder="client@example.com")
 default_rate = st.number_input("Standard Hourly Rate ($)", value=120.0, step=10.0, min_value=0.0)
 estimated_hours = st.number_input("Extra Hours Needed", min_value=0.5, value=3.0, step=0.5)
 is_rush = st.checkbox("Mark as Rush / Priority Work (1.5x Rate)")
@@ -82,6 +84,12 @@ Please let me know if you approve this addition, and I will get started right aw
 Best regards,"""
 
     st.code(email_text, language="text")
+    # Direct Email Button
+    encoded_subject = urllib.parse.quote("Change Order Estimate - Additional Requested Work")
+    encoded_body = urllib.parse.quote(email_text)
+    mailto_url = f"mailto:{client_email}?subject={encoded_subject}&body={encoded_body}"
+
+    st.markdown(f'<a href="{mailto_url}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">✉️ Open in Email App & Send</a>', unsafe_allow_html=True)
 # --- Currency Switcher ---
 currency_options = {
     "USD ($)": "$",
