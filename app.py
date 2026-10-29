@@ -92,7 +92,16 @@ selected_currency = st.selectbox("Currency", list(currency_options.keys()))
 curr_symbol = currency_options[selected_currency]
 st.metric("Effective Rate", f"{curr_symbol}{active_rate:,.2f}/hr")
 st.metric("Total Additional Fee", f"{curr_symbol}{total_fee:,.2f}")
-* **Inside the email template:**
-  ```python
-  • Rate: {curr_symbol}{active_rate:,.2f}/hr
-  • Additional Fee: {curr_symbol}{total_fee:,.2f}
+email_text = f"""Hi {client_name if client_name else 'there'},
+
+Thanks for reaching out! Regarding the additional work requested:
+
+I'd be happy to take care of this for you. Since this request falls outside our original contract scope, here is the estimate to complete it:
+
+- Estimated Hours: {estimated_hours} hrs
+- Rate: {curr_symbol}{active_rate:,.2f}/hr {'(Rush Rate)' if is_rush else ''}
+- Additional Fee: {curr_symbol}{total_fee:,.2f}
+
+Please let me know if you approve this addition, and I will get started right away!
+
+Best regards,"""
