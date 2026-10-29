@@ -105,3 +105,5 @@ I'd be happy to take care of this for you. Since this request falls outside our 
 Please let me know if you approve this addition, and I will get started right away!
 
 Best regards,"""
+st.metric("Effective Rate", f"{curr_symbol}{active_rate:,.2f}/hr")
+st.metric("Total Additional Fee", f"{curr_symbol}{total_fee:,.2f}")
