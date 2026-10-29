@@ -105,3 +105,27 @@ I'd be happy to take care of this for you. Since this request falls outside our 
 Please let me know if you approve this addition, and I will get started right away!
 
 Best regards,"""
+# --- Scope Templates ---
+templates = {
+    "Custom (Blank)": {"hours": 2.0, "rate": 100.0, "rush": False},
+    "🎨 Design Revisions (Extra Concepts)": {
+        "hours": 3.0,
+        "rate": 120.0,
+        "rush": False,
+    },
+    "💻 Web Dev (Extra Page / Integration)": {
+        "hours": 5.0,
+        "rate": 150.0,
+        "rush": True,
+    },
+    "✍️ Copywriting (Extra Landing Page)": {
+        "hours": 2.5,
+        "rate": 90.0,
+        "rush": False,
+    },
+    "🚨 Emergency Bug Fix / Quick Patch": {
+        "hours": 1.0,
+        "rate": 200.0,
+        "rush": True,
+    },
+}
