@@ -15,7 +15,7 @@ VALID_KEYS = ["EXTRA2026", "PRO_MEMBER_99", "FREELANCE_BOOST"]
 # --- Sidebar Pro Activation ---
 with st.sidebar:
     st.header("⚡ ExtraMo Pro")
-    st.caption("Price: $25 / month")
+    st.caption("Price: $10.00/ month")
     
     if st.session_state["is_subscribed"]:
         st.success("🟢 Pro Plan Active")
