@@ -87,22 +87,4 @@ Please let me know if you approve this addition, and I will get started right aw
 Best regards,"""
     st.code(email_text, language="text")
     if uploaded_logo is not None:
-        st.image(uploaded_logo, width=120)
-    # Direct Email Button
-    encoded_subject = urllib.parse.quote("Change Order Estimate - Additional Requested Work")
-    encoded_body = urllib.parse.quote(email_text)
-    mailto_url = f"mailto:{client_email}?subject={encoded_subject}&body={encoded_body}"
-
-    st.markdown(f'<a href="{mailto_url}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">✉️ Open in Email App & Send</a>', unsafe_allow_html=True)
-
-Thanks for reaching out! Regarding the additional work requested:
-
-I'd be happy to take care of this for you. Since this request falls outside our original contract scope, here is the estimate to complete it:
-
-- Estimated Hours: {estimated_hours} hrs
-- Rate: {curr_symbol}{active_rate:,.2f}/hr {'(Rush Rate)' if is_rush else ''}
-- Additional Fee: {curr_symbol}{total_fee:,.2f}
-
-Please let me know if you approve this addition, and I will get started right away!
-
-Best regards,"""
+        st.image(uploaded_logo, width=120) 
