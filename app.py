@@ -94,17 +94,6 @@ Best regards,"""
     mailto_url = f"mailto:{client_email}?subject={encoded_subject}&body={encoded_body}"
 
     st.markdown(f'<a href="{mailto_url}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">✉️ Open in Email App & Send</a>', unsafe_allow_html=True)
-# --- Currency Switcher ---
-currency_options = {
-    "USD ($)": "$",
-    "EUR (€)": "€",
-    "GBP (£)": "£",
-    "AED (د.إ)": "د.إ",}
-selected_currency = st.selectbox("Currency", list(currency_options.keys()))
-curr_symbol = currency_options[selected_currency]
-st.metric("Effective Rate", f"{curr_symbol}{active_rate:,.2f}/hr")
-st.metric("Total Additional Fee", f"{curr_symbol}{total_fee:,.2f}")
-email_text = f"""Hi {client_name if client_name else 'there'},
 
 Thanks for reaching out! Regarding the additional work requested:
 
