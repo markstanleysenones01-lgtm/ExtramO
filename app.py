@@ -69,8 +69,8 @@ can_access = st.session_state["is_subscribed"] or st.session_state["free_uses_le
 
 if not can_access:
     st.error("🔒 Free limit reached! You have used all 3 free change order drafts.")
-    st.info("Subscribe for **$25.00/month** to get unlimited change orders and email exports.")
-    st.markdown("[👉 **Click Here to Subscribe ($5.99/mo)**](https://buy.stripe.com/your_checkout_link_here)")
+    st.info("Subscribe for **$10.00/month** to get unlimited change orders and email exports.")
+    st.markdown("[👉 **Click Here to Subscribe ($10.00/mo)**](https://buy.stripe.com/your_checkout_link_here)")
 else:
     email_text = f"""Hi {client_name if client_name else 'there'},
 
