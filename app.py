@@ -85,8 +85,8 @@ I'd be happy to take care of this for you. Since this request falls outside our 
 Please let me know if you approve this addition, and I will get started right away!
 
 Best regards,"""
-   if uploaded_logo is not None:
-        st.image(uploaded_logo, width=120) 
+if uploaded_logo is not None:
+        st.image(uploaded_logo, width=120)
     st.code(email_text, language="text")
     # Direct Email Button
     encoded_subject = urllib.parse.quote("Change Order Estimate - Additional Requested Work")
