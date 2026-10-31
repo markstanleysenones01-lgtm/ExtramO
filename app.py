@@ -39,6 +39,9 @@ st.divider()
 st.subheader("1. Request Details")
 client_name = st.text_input("Client Name", placeholder="Acme Corp")
 client_email = st.text_input("Client Email Address", placeholder="client@example.com")
+uploaded_logo = st.file_uploader("Upload Company Logo (Optional)", type=["png", "jpg", "jpeg"])
+if uploaded_logo is not None:
+    st.image(uploaded_logo, width=150)
 default_rate = st.number_input("Standard Hourly Rate ($)", value=120.0, step=10.0, min_value=0.0)
 estimated_hours = st.number_input("Extra Hours Needed", min_value=0.5, value=3.0, step=0.5)
 is_rush = st.checkbox("Mark as Rush / Priority Work (1.5x Rate)")
@@ -82,7 +85,8 @@ I'd be happy to take care of this for you. Since this request falls outside our 
 Please let me know if you approve this addition, and I will get started right away!
 
 Best regards,"""
-
+   if uploaded_logo is not None:
+        st.image(uploaded_logo, width=120) 
     st.code(email_text, language="text")
     # Direct Email Button
     encoded_subject = urllib.parse.quote("Change Order Estimate - Additional Requested Work")
