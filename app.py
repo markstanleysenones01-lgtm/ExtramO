@@ -88,3 +88,9 @@ Best regards,"""
     st.code(email_text, language="text")
     if uploaded_logo is not None:
         st.image(uploaded_logo, width=120) 
+# Direct Email Button
+    encoded_subject = urllib.parse.quote("Change Order Estimate - Additional Requested Work")
+    encoded_body = urllib.parse.quote(email_text)
+    mailto_url = f"mailto:{client_email}?subject={encoded_subject}&body={encoded_body}"
+
+    st.markdown(f'<a href="{mailto_url}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">✉️ Open in Email App & Send</a>', unsafe_allow_html=True)
