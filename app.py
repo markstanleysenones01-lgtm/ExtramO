@@ -94,3 +94,24 @@ Best regards,"""
     mailto_url = f"mailto:{client_email}?subject={encoded_subject}&body={encoded_body}"
 
     st.markdown(f'<a href="{mailto_url}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">✉️ Open in Email App & Send</a>', unsafe_allow_html=True)
+# Save to History Button
+    if "scope_history" not in st.session_state:
+        st.session_state["scope_history"] = []
+
+    if st.button("💾 Save to History"):
+        history_item = {
+            "client": client_name if client_name else "Unnamed Client",
+            "fee": total_fee,
+            "hours": estimated_hours,
+        }
+        st.session_state["scope_history"].append(history_item)
+        st.success("Saved to history!")
+
+# --- Display History Sidebar or Section ---
+if st.session_state.get("scope_history"):
+    st.divider()
+    st.subheader("📂 Saved Change Orders")
+    for idx, item in enumerate(st.session_state["scope_history"], 1):
+        st.text(
+            f"{idx}. {item['client']} — ${item['fee']:,.2f} ({item['hours']} hrs)"
+        )
