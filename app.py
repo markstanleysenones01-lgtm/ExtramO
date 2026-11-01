@@ -1,9 +1,43 @@
 import streamlit as st
 import urllib.parse
+# --- Custom CSS Styling for Dynamic UI ---
+st.markdown(
+    """
+    <style>
+    .stButton>button {
+        width: 100%;
+        border-radius: 8px;
+        font-weight: bold;
+        background-color: #ff4b4b;
+        color: white;
+        transition: 0.3s;
+    }
+    .stButton>button:hover {
+        background-color: #ff2222;
+        box-shadow: 0 4px 12px rgba(255, 75, 75, 0.4);
+    }
+    div.stMetric {
+        background-color: #1e1e2f;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #2d2d44;
+    }
+    </style>
+""",
+    unsafe_allow_html=True,
+)
 # --- App Header ---
 st.title("⚡ ExtraMo")
 st.caption("Turn extra client requests into extra revenue.")
-
+# --- Dynamic Personal Greeting ---
+if client_name:
+    st.markdown(
+        f"### 👋 Crafting extra revenue for **{client_name}** right now."
+    )
+else:
+    st.markdown(
+        "### 👋 Welcome back! Ready to turn extra requests into cash?"
+    )
 # --- Session State Management ---
 if "free_uses_left" not in st.session_state:
     st.session_state["free_uses_left"] = 3
