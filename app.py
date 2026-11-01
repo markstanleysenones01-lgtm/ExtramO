@@ -115,3 +115,16 @@ if st.session_state.get("scope_history"):
         st.text(
             f"{idx}. {item['client']} — ${item['fee']:,.2f} ({item['hours']} hrs)"
         )
+# --- Lifetime Dashboard Stats ---
+if "total_revenue_generated" not in st.session_state:
+    st.session_state["total_revenue_generated"] = 0.0
+if "total_hours_quoted" not in st.session_state:
+    st.session_state["total_hours_quoted"] = 0.0
+
+st.divider()
+st.subheader("📊 Your ExtraMo Dashboard")
+col1, col2 = st.columns(2)
+with col1:
+    st.metric("Total Revenue Quoted", f"${total_fee:,.2f}")
+with col2:
+    st.metric("Total Extra Hours", f"{estimated_hours} hrs")
