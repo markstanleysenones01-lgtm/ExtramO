@@ -30,14 +30,7 @@ st.markdown(
 st.title("⚡ ExtraMo")
 st.caption("Turn extra client requests into extra revenue.")
 # --- Dynamic Personal Greeting ---
-if client_name:
-    st.markdown(
-        f"### 👋 Crafting extra revenue for **{client_name}** right now."
-    )
-else:
-    st.markdown(
-        "### 👋 Welcome back! Ready to turn extra requests into cash?"
-    )
+st.markdown("### 👋 Welcome back! Ready to turn extra requests into cash?")
 # --- Session State Management ---
 if "free_uses_left" not in st.session_state:
     st.session_state["free_uses_left"] = 3
