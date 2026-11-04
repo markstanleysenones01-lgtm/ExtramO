@@ -130,12 +130,6 @@ if "scope_history" not in st.session_state:
 if st.button("💾 Save to History"):
     history_item = {
         "client": client_name if client_name else "Unnamed Client",
-        "fee": total_fee,
-        "hours": estimated_hours,
-    }
-    st.session_state["scope_history"].append(history_item)
-    st.success("Saved to history!")
-
 # --- Display History & Dashboard Stats ---
 if st.session_state.get("scope_history"):
     st.divider()
@@ -153,29 +147,4 @@ if st.session_state.get("scope_history"):
     with col1:
         st.metric("Total Revenue Quoted", f"${total_rev:,.2f}")
     with col2:
-        st.metric("Total Extra Hours", f"{total_hrs} hrs")
-
-# --- Display History Sidebar or Section ---
-if st.session_state.get("scope_history"):
-    st.divider()
-    st.subheader("📂 Saved Change Orders")
-    for idx, item in enumerate(st.session_state["scope_history"], 1):
-        st.text(
-            f"{idx}. {item['client']} — ${item['fee']:,.2f} ({item['hours']} hrs)"
-        )
-# --- Lifetime Dashboard Stats ---
-if "total_revenue_generated" not in st.session_state:
-    st.session_state["total_revenue_generated"] = 0.0
-if "total_hours_quoted" not in st.session_state:
-    st.session_state["total_hours_quoted"] = 0.0
-
-st.session_state["total_revenue_generated"] += total_fee
-st.session_state["total_hours_quoted"] += estimated_hours
-
-st.divider()
-st.subheader("📊 Your ExtraMo Dashboard")
-col1, col2 = st.columns(2)
-with col1:
-    st.metric("Total Revenue Quoted", f"${st.session_state['total_revenue_generated']:,.2f}")
-with col2:
-    st.metric("Total Extra Hours", f"{st.session_state['total_hours_quoted']} hrs")
+        st.metric("Total Extra Hours", f"{total_hrs} hrs")        
