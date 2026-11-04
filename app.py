@@ -144,10 +144,13 @@ if "total_revenue_generated" not in st.session_state:
 if "total_hours_quoted" not in st.session_state:
     st.session_state["total_hours_quoted"] = 0.0
 
+st.session_state["total_revenue_generated"] += total_fee
+st.session_state["total_hours_quoted"] += estimated_hours
+
 st.divider()
 st.subheader("📊 Your ExtraMo Dashboard")
 col1, col2 = st.columns(2)
 with col1:
-    st.metric("Total Revenue Quoted", f"${total_fee:,.2f}")
+    st.metric("Total Revenue Quoted", f"${st.session_state['total_revenue_generated']:,.2f}")
 with col2:
-    st.metric("Total Extra Hours", f"{estimated_hours} hrs")
+    st.metric("Total Extra Hours", f"{st.session_state['total_hours_quoted']} hrs")
