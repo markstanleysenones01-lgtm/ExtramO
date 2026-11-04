@@ -43,25 +43,21 @@ VALID_KEYS = ["EXTRA2026", "PRO_MEMBER_99", "FREELANCE_BOOST"]
 # --- Sidebar Pro Activation ---
 with st.sidebar:
     st.header("⚡ ExtraMo Pro")
-    st.caption("Price: $10.00/ month")
-    
+    st.caption("Price: $10.00 / month")
+
+    # Check if PayPal redirected back with ?pro=true
+    query_params = st.query_params
+    if query_params.get("pro") == "true":
+        st.session_state["is_subscribed"] = True
+
     if st.session_state["is_subscribed"]:
         st.success("🟢 Pro Plan Active")
     else:
         st.warning(f"Free Plan: {st.session_state['free_uses_left']} uses remaining")
-        
-        st.subheader("🔑 Activate Pro Account")
-        key_input = st.text_input("Enter License Key", type="password")
-        if st.button("Unlock Unlimited Access"):
-            if key_input.strip() in VALID_KEYS:
-                st.session_state["is_subscribed"] = True
-                st.success("Successfully upgraded to Pro!")
-                st.rerun()
-            else:
-                st.error("Invalid Key")
 
-st.divider()
-
+        st.markdown(
+            "[👉 **Upgrade to Pro ($10/mo)**](https://www.paypal.com/ncp/payment/YOUR_PAYPAL_BUTTON_ID)"
+        )
 # --- Form Inputs ---
 st.subheader("1. Request Details")
 client_name = st.text_input("Client Name", placeholder="Acme Corp")
