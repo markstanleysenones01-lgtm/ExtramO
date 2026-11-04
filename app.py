@@ -130,12 +130,11 @@ if "scope_history" not in st.session_state:
 if st.button("💾 Save to History"):
     history_item = {
         "client": client_name if client_name else "Unnamed Client",
-if st.button("💾 Save to History"):
-    history_item = {
-        "client": client_name if client_name else "Unnamed Client",
         "fee": total_fee,
-        "hours": estimated_hours,
+        "hours": estimated_hours
     }
+    st.session_state["scope_history"].append(history_item)
+    st.success("Saved to history!")
     st.session_state["scope_history"].append(history_item)
     st.success("Saved to history!")
 
