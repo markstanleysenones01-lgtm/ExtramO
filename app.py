@@ -130,12 +130,14 @@ if "scope_history" not in st.session_state:
 if st.button("💾 Save to History"):
     history_item = {
         "client": client_name if client_name else "Unnamed Client",
-# --- Display History & Dashboard Stats ---
-if st.session_state.get("scope_history"):
-    st.divider()
-    st.subheader("📂 Saved Change Orders")
-    for idx, item in enumerate(st.session_state["scope_history"], 1):
-        st.text(f"{idx}. {item['client']} — ${item['fee']:,.2f} ({item['hours']} hrs)")
+if st.button("💾 Save to History"):
+    history_item = {
+        "client": client_name if client_name else "Unnamed Client",
+        "fee": total_fee,
+        "hours": estimated_hours,
+    }
+    st.session_state["scope_history"].append(history_item)
+    st.success("Saved to history!")
 
     # --- Lifetime Dashboard Stats (Calculated safely from history) ---
     total_rev = sum(item["fee"] for item in st.session_state["scope_history"])
