@@ -58,6 +58,12 @@ with st.sidebar:
         st.markdown(
             "[👉 **Upgrade to Pro ($10/mo)**](https://www.paypal.com/ncp/payment/YOUR_PAYPAL_BUTTON_ID)"
         )
+        st.divider()
+    st.subheader("⏱️ Quick Rate Finder")
+    q_hours = st.number_input("Hours Needed", min_value=1.0, value=5.0, step=1.0, key="q_hours")
+    q_rate = st.number_input("Desired Rate ($/hr)", min_value=10.0, value=50.0, step=5.0, key="q_rate")
+    q_total = q_hours * q_rate
+    st.info(f"Recommended Quote: **${q_total:,.2f}**")
 # --- Form Inputs ---
 st.subheader("1. Request Details")
 client_name = st.text_input("Client Name", placeholder="Acme Corp")
